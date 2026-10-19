@@ -13,9 +13,9 @@
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v7.js"></script>
 
-  <title>State of the Art and Future of Federated Learning in Neuroimaging</title>
+  <title>Federated Learning in Neuroimaging</title>
 
-  <meta name="description" content="A presentation about federated learning in neuroimaging">
+  <meta name="description" content="Federated learning in neuroimaging: methods, platforms, and local models">
   <meta name="author" content="Sergey M Plis">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,8 +51,8 @@
     <section>
       <!-- 0. Title Slide -->
       <section data-state="opening-slide" data-background-iframe="figures/background_nodes.svg" data-background-opacity="0.3" data-background-size="contain">
-        <h2>State of the Art and Future of Federated Learning in Neuroimaging</h2>
-        <h4>From Methods to Platforms</h4>
+        <h2>Federated Learning in Neuroimaging</h2>
+        <h4 style="text-transform:none;">methods, platforms, and local models</h4>
         <div style="margin-top: 30px; font-size: 28px;">
           Sergey Plis
         </div>
@@ -752,6 +752,26 @@
           brainchop runs a small deep model entirely in the browser: zero-footprint install,
           instant load, no IT department, no server. Data never leaves the device.
           Extreme on usability and on privacy -- but single-site, edge inference.
+        </aside>
+      </section>
+
+      <!-- Interactive Brainchop demo, immediately after "Another way" -->
+      <section id="brainchop-demo" class="brainchop-demo" data-hide-chrome>
+        <div class="brainchop-demo-toolbar">
+          <span>Brainchop &middot; live demo</span>
+          <div class="brainchop-demo-actions">
+            <a href="https://neuroneural.net/brainchop-test/" target="_blank" rel="noopener noreferrer">Open in new tab &#8599;</a>
+            <button type="button" onclick="Reveal.prev()" aria-label="Previous slide">&#8592; Previous</button>
+            <button type="button" onclick="Reveal.next()" aria-label="Next slide">Next &#8594;</button>
+          </div>
+        </div>
+        <iframe data-src="https://neuroneural.net/brainchop-test/"
+                title="Brainchop interactive brain segmentation demo"
+                allow="fullscreen" allowfullscreen></iframe>
+        <aside class="notes">
+          Live Brainchop demo. Interact with the viewer and select a model to run segmentation
+          locally in the browser. Use the toolbar to return to the talk after interacting
+          with the embedded app, or open the demo in a separate tab.
         </aside>
       </section>
 
@@ -1790,6 +1810,24 @@
     }
     .reveal .bc-qr img { height: 160px; width: 160px; border: 6px solid #fff; border-radius: 8px; box-shadow: 0 4px 18px rgba(0,0,0,.5); background:#fff; }
     .reveal .bc-qr span { font-size: 26px; font-weight: 700; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.9); }
+
+    /* Live demo fills the slide; navigation remains outside the embedded app. */
+    .reveal section.brainchop-demo { top: 0 !important; height: 100% !important; }
+    .reveal .brainchop-demo-toolbar {
+      height: 48px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px; box-sizing: border-box; color: #586e75; font-size: 20px;
+    }
+    .reveal .brainchop-demo-actions { display: flex; align-items: center; gap: 20px; }
+    .reveal .brainchop-demo-actions button {
+      border: 1px solid #93a1a1; border-radius: 4px; padding: 5px 10px;
+      background: transparent; color: #586e75; font: inherit; cursor: pointer;
+    }
+    .reveal .brainchop-demo-actions button:hover,
+    .reveal .brainchop-demo-actions button:focus-visible { background: #eee8d5; }
+    .reveal .brainchop-demo iframe {
+      display: block; width: 100%; height: calc(100% - 48px);
+      max-width: none; max-height: none; border: 0; margin: 0; background: #000;
+    }
 
     /* --- NeuroFLAME video close slide (mirrors brainchop treatment) --- */
     .reveal .nf-caption {
