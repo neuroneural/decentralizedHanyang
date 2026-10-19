@@ -50,7 +50,7 @@
     <!-- Single section: all slides are vertical (nested) -->
     <section>
       <!-- 0. Title Slide -->
-      <section data-background-iframe="figures/background_nodes.svg" data-background-opacity="0.3" data-background-size="contain">
+      <section data-state="opening-slide" data-background-iframe="figures/background_nodes.svg" data-background-opacity="0.3" data-background-size="contain">
         <h2>State of the Art and Future of Federated Learning in Neuroimaging</h2>
         <h4>From Methods to Platforms</h4>
         <div style="margin-top: 30px; font-size: 28px;">
@@ -1752,6 +1752,10 @@
       position: absolute;
       top: 0%;
       left: 0%;
+    }
+
+    .opening-slide #header-left img {
+      width: 130px;
     }
 
     #header-right {
