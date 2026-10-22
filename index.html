@@ -40,6 +40,60 @@
   </script>
 
 
+<style>
+/* Published COINSTAC cases: retain the deck's theme and original paper artwork. */
+.reveal .slides section.case-slide { height: 650px; }
+.reveal .case-slide h2 { font-size: 1.8em; margin: 0 0 12px; }
+.reveal .case-slide .case-sub { font-size: 27px; line-height: 1.3; margin: 0 0 20px; }
+.reveal .case-columns { display: flex; align-items: center; gap: 30px; height: 465px; }
+.reveal .case-columns figure { display: block; flex: 1; margin: 0; padding: 0; min-width: 0; }
+.reveal .case-columns img { display: block; width: 100%; max-width: 100%; max-height: 465px; object-fit: contain; margin: 0; }
+.reveal .case-columns figcaption { font-size: 19px; line-height: 1.3; margin-top: 12px; }
+.reveal .case-copy { text-align: left; font-size: 27px; line-height: 1.35; }
+.reveal .case-copy p { margin: 0 0 26px; }
+.reveal .case-copy strong { color: #2a8c84; }
+.reveal .case-copy .case-small { font-size: 20px; color: #657b83; }
+.reveal .case-workflow .case-copy { width: 44%; font-size: 25px; }
+.reveal .case-result figure { flex: 0 0 54%; }
+.reveal .case-correlations figure { flex: 0 0 62%; }
+.reveal .case-cohort-line { font-size: 24px; margin: 0 0 18px; color: #2a8c84; }
+.reveal .case-slide img.case-table { display: block; width: 100%; max-width: 100%; height: 420px; max-height: none; object-fit: contain; margin: 0; }
+.reveal .slides .case-slide .slide-footer { position: absolute; bottom: 0; font-size: 16px; line-height: 1.3; }
+
+/* Gazula: geographic provenance above a schematic two-node computation. */
+.reveal .slides section#gazula-federation { height: 700px; }
+#gazula-federation .case-sub { margin-bottom: 3px; }
+#gazula-federation .gm-map { display: block; width: 100%; height: 490px; overflow: visible; }
+#gazula-federation .gm-map text { font-family: Lato, sans-serif; font-size: 18px; }
+#gazula-federation .gm-scan-note { fill: #657b83; font-size: 16px !important; }
+#gazula-federation .gm-node-name { fill: #586e75; font-weight: 700; font-size: 21px !important; }
+#gazula-federation .gm-local { fill: #657b83; font-size: 16px !important; }
+#gazula-federation .gm-result { fill: #2a8c84; font-weight: 700; }
+#gazula-federation .gm-exchange { opacity: 0; transition: opacity .2s; fill: #586e75; }
+#gazula-federation .gm-nodes { opacity: 1; transition: opacity .25s; }
+#gazula-federation[data-gm-stage="0"] .gm-nodes { opacity: 0; }
+#gazula-federation .gm-flow { fill: none; stroke: #657b83; stroke-width: 2.5; stroke-dasharray: 8 6; marker-end: url(#gm-arrow); animation: gm-message .8s linear infinite; animation-play-state: paused; }
+#gazula-federation[data-gm-stage="2"] .gm-forward,
+#gazula-federation[data-gm-stage="2"] .gm-stats,
+#gazula-federation[data-gm-stage="3"] .gm-return,
+#gazula-federation[data-gm-stage="4"] .gm-forward,
+#gazula-federation[data-gm-stage="4"] .gm-residual { opacity: 1; }
+#gazula-federation.present[data-gm-stage="2"] .gm-forward .gm-flow,
+#gazula-federation.present[data-gm-stage="3"] .gm-return .gm-flow,
+#gazula-federation.present[data-gm-stage="4"] .gm-forward .gm-flow { animation-play-state: running; }
+@keyframes gm-message { to { stroke-dashoffset: -28; } }
+#gazula-federation .gm-step { position: absolute; width: 0; height: 0; }
+#gazula-federation .gm-captions { position: relative; height: 32px; margin: 0; }
+#gazula-federation .gm-captions p { display: none; font-size: 21px; margin: 0; color: #2a8c84; }
+#gazula-federation[data-gm-stage="0"] [data-gm-caption="0"],
+#gazula-federation[data-gm-stage="1"] [data-gm-caption="1"],
+#gazula-federation[data-gm-stage="2"] [data-gm-caption="2"],
+#gazula-federation[data-gm-stage="3"] [data-gm-caption="3"],
+#gazula-federation[data-gm-stage="4"] [data-gm-caption="4"] { display: block; }
+@media (prefers-reduced-motion: reduce) { #gazula-federation .gm-flow { animation: none; } }
+@media print { #gazula-federation .gm-nodes, #gazula-federation .gm-forward, #gazula-federation .gm-stats { opacity: 1; } }
+</style>
+
 </head>
 
 
@@ -208,37 +262,6 @@
 
       </section>
 
-      <!-- 1b. Foundation-model era: even more data, almost none of it accessible -->
-      <section>
-        <h2>&hellip;and Foundation Models Are Hungry</h2>
-        <div style="position:relative; display:inline-block; margin-top:-45px;">
-          <img src="figures/foundation_model_training_data.svg" alt="Comparative training-data sizes of foundation models"
-               style="border:0; box-shadow:none; background:none; height:600px; max-width:100%; margin-top: -10px;">
-          <!-- fragment overlaid in the empty band of the chart -->
-          <div class="fragment" style="position:absolute; left:46%; top:30%; transform:translate(-70%,-70%); width:44%; text-align:center; line-height:1.25; font-size:0.8em; color: #FF0000;">
-            yet, globally, we have amassed<br>
-            <strong style="font-size:1.5em;">&gt;1 billion MRI scans</strong>
-          </div>
-        </div>
-        <div class="slide-footer">
-          Sources: [<a href="https://collectiveminds.health/articles/number-of-mri-scans-per-year-worldwide-overview-of-global-mri-utilization" target="_blank" rel="noopener noreferrer">global MRI volumes (~100&ndash;150M/yr)</a>]
-          &middot; [<a href="https://www.scality.com/use-cases/medical-imaging-archive/" target="_blank" rel="noopener noreferrer">imaging share of healthcare data</a>]
-        </div>
-        <aside class="notes">
-          This is the age of foundation models &mdash; everywhere, and now in neuroimaging.
-          But look at the scale gap: frontier LLMs train on tens of trillions of tokens; the best
-          brain-imaging foundation models train on ~50-100k scans (BrainIAC ~49k, BrainLM ~77k,
-          MR-RATE ~98k). Meanwhile the world acquires ~100-150M MRI scans every year (~40M in the US
-          alone); brain & spine are >50% of studies, so tens of millions of brain MRIs annually.
-          Medical imaging is ~70% of all stored healthcare data, yet <10% of images are ever retrieved
-          after 60 days. So the addressable pool is hundreds of millions of brain scans sitting dark in
-          PACS and research archives &mdash; and our FMs touch well under 0.1% of even a single year.
-          That locked "dark knowledge" is exactly what federation could unlock.
-          (Numbers are order-of-magnitude, off-the-cuff: collectiveminds.health MRI volumes; Scality/
-          industry PACS figures.)
-        </aside>
-      </section>
-
       <!-- 2. Data mining approaches: three growing columns -->
       <section>
         <h2>Data Mining Approaches</h2>
@@ -313,6 +336,127 @@
         </aside>
       </section>
 
+      <!-- Case 1: Gazula 2021 — the mechanics of federated analysis -->
+      <section id="gazula-federation" class="case-slide" data-gm-stage="0">
+        <h2>Federation in Practice</h2>
+        <p class="case-sub">14 contributing sites</p>
+        <svg class="gm-map" viewBox="0 0 960 490" role="img" aria-labelledby="gm-title gm-desc">
+          <title id="gm-title">IMAGEN and cVEDA sites and federated summary-statistic exchange</title>
+          <desc id="gm-desc">Eight European IMAGEN sites and six Indian cVEDA sites. The two computing nodes are shown schematically below the maps. Only summary statistics and coefficients travel to and from the aggregator; scans stay at the consortium nodes during analysis.</desc>
+          <defs>
+            <marker id="gm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10Z" fill="#657b83"/></marker>
+          </defs>
+          <image href="figures/gazula2021_sites.svg" x="0" y="0" width="960" height="310"/>
+          <text class="gm-scan-note" x="480" y="327" text-anchor="middle">NIMHANS, SJRI and Rishi Valley participants were scanned at NIMHANS.</text>
+          <g class="gm-nodes">
+            <g class="gm-node" data-computing-node="IMAGEN">
+              <circle cx="175" cy="379" r="23" fill="#268bd2"/>
+              <text x="175" y="385" text-anchor="middle" fill="#fdf6e3">UK</text>
+              <text class="gm-node-name" x="175" y="426" text-anchor="middle">IMAGEN node</text>
+              <text class="gm-local" x="175" y="450" text-anchor="middle">scans stay here</text>
+            </g>
+            <g class="gm-node" data-computing-node="cVEDA">
+              <circle cx="785" cy="379" r="23" fill="#2a8c84"/>
+              <text x="785" y="385" text-anchor="middle" fill="#fdf6e3">IN</text>
+              <text class="gm-node-name" x="785" y="426" text-anchor="middle">cVEDA node · India</text>
+              <text class="gm-local" x="785" y="450" text-anchor="middle">scans stay here</text>
+            </g>
+            <circle cx="480" cy="379" r="26" fill="#eee8d5" stroke="#657b83" stroke-width="2"/>
+            <text x="480" y="386" text-anchor="middle" style="font-size:25px">Σ</text>
+            <text class="gm-node-name" x="480" y="426" text-anchor="middle">Aggregator</text>
+            <text class="gm-local" x="480" y="450" text-anchor="middle">schematic placement</text>
+          </g>
+          <g class="gm-exchange gm-forward">
+            <path class="gm-flow" d="M207,368L445,368"/>
+            <path class="gm-flow" d="M753,368L515,368"/>
+          </g>
+          <g class="gm-exchange gm-stats">
+            <text x="326" y="356" text-anchor="middle">XᵀX · Xᵀy</text>
+            <text x="634" y="356" text-anchor="middle">XᵀX · Xᵀy</text>
+          </g>
+          <g class="gm-exchange gm-return">
+            <path class="gm-flow" d="M445,390L207,390"/>
+            <path class="gm-flow" d="M515,390L753,390"/>
+            <text x="326" y="370" text-anchor="middle">global coefficients β</text>
+            <text x="634" y="370" text-anchor="middle">global coefficients β</text>
+          </g>
+          <g class="gm-exchange gm-residual">
+            <text x="326" y="356" text-anchor="middle">residual summaries</text>
+            <text x="634" y="356" text-anchor="middle">residual summaries</text>
+            <text x="480" y="478" text-anchor="middle" class="gm-result">joint t- and p-value maps</text>
+          </g>
+        </svg>
+        <span class="fragment gm-step" data-fragment-index="0" aria-hidden="true"></span>
+        <span class="fragment gm-step" data-fragment-index="1" aria-hidden="true"></span>
+        <span class="fragment gm-step" data-fragment-index="2" aria-hidden="true"></span>
+        <span class="fragment gm-step" data-fragment-index="3" aria-hidden="true"></span>
+        <div class="gm-captions" aria-live="polite">
+          <p data-gm-caption="0">Eight IMAGEN sites in Europe; six cVEDA sites in India.</p>
+          <p data-gm-caption="1">During analysis, each consortium keeps its scans at its own node.</p>
+          <p data-gm-caption="2">Local cross-products are sent; the aggregator fits the joint regression.</p>
+          <p data-gm-caption="3">Global coefficients return to both nodes for local residual calculations.</p>
+          <p data-gm-caption="4">Residual summaries are combined to produce joint statistical maps.</p>
+        </div>
+        <div class="slide-footer"><a href="https://doi.org/10.1007/s12021-020-09502-7" target="_blank" rel="noopener">Harshvardhan Gazula et al. (2021)</a> · <a href="https://academic.oup.com/cercor/article/30/4/2708/5673285" target="_blank" rel="noopener">IMAGEN sites</a> · <a href="https://cveda-project.org/dataset.html" target="_blank" rel="noopener">cVEDA sites</a></div>
+        <aside class="notes">
+          Site locations verified against Gazula et al. (2021), §3.1–3.2 and Tables 1–2;
+          the IMAGEN primary study Lett et al. (2020), Cerebral Cortex 30:2708–2726,
+          https://doi.org/10.1093/cercor/bhz270 (Subjects); and the cVEDA consortium dataset page,
+          https://cveda-project.org/dataset.html.
+          IMAGEN: London and Nottingham (UK), Dublin (Ireland), Paris (France), Berlin,
+          Dresden, Hamburg and Mannheim (Germany).
+          cVEDA sites represented in this paper: PGIMER (Chandigarh), Kolkata,
+          Holdsworth Memorial Hospital (Mysuru), NIMHANS (Bengaluru), St John's Research
+          Institute/SJRI (Bengaluru), and Rishi Valley Rural Health Centre (Andhra Pradesh).
+          The broader cVEDA consortium also includes Imphal, which is not one of the six
+          contributing MRI sites listed for this analysis. Kolkata is the paper's imaging/site
+          label; the broader recruitment catchment includes Asansol.
+          Fourteen contributing sites do not mean fourteen distinct scanning locations:
+          NIMHANS, SJRI and Rishi Valley participants were scanned at NIMHANS in Bengaluru.
+          Table 2 lists five scanner entries across four Indian cities. NIMHANS and SJRI
+          markers are slightly separated for legibility, with leader lines to Bengaluru.
+          All map coordinates are approximate city/region positions, not scanner addresses.
+          Two consortium computing nodes are documented (IMAGEN in the UK and cVEDA in India).
+          Node placement below the maps is schematic: no city or hosting location is asserted
+          for either analysis machine or the aggregator. Maps show cohort provenance,
+          not fourteen independently federating machines.
+          Reveal sequence: 1) two local analysis nodes; 2) X_j^T X_j and X_j^T y_j travel
+          to the aggregator, which fits global coefficients; 3) coefficients return;
+          4) local residual and other summaries support joint inference (paper §2.1).
+          Animation depicts message types and direction, not measured latency or packet counts.
+          Raw scans remain at the two consortium nodes during this federated computation;
+          this does not assert that data never moved during cohort assembly/preprocessing.
+          Data locality alone is not a formal differential-privacy guarantee.
+          Cartography: Natural Earth 1:110m countries (public domain), geographic insets at
+          different scales. https://www.naturalearthdata.com/about/terms-of-use/
+        </aside>
+      </section>
+
+      <section id="gazula-age-result" class="case-slide">
+        <h2>Adolescent Brain Structure</h2>
+        <p class="case-sub">A joint voxelwise analysis of age, BMI and smoking</p>
+        <div class="case-columns case-result">
+          <figure>
+            <img src="figures/gazula2021_age.png" alt="Gazula et al. Figure 7: original coronal, sagittal and axial age-association maps, including the signed significance colour scale">
+          </figure>
+          <div class="case-copy">
+            <p><strong>Shown: association with age</strong><br>Lower gray-matter volume across much of the cortex; higher volume in the hippocampi.</p>
+            <p class="fragment"><strong>One result across cohorts</strong><br>Approximately 40 minutes for the reported decentralized analysis.</p>
+            <p class="case-small">Original Fig. 7 · FDR 0.05<br>Colour: signed −log₁₀(p)</p>
+          </div>
+        </div>
+        <div class="slide-footer"><a href="https://doi.org/10.1007/s12021-020-09502-7" target="_blank" rel="noopener">Harshvardhan Gazula et al. · Neuroinformatics (2021)</a> · Fig. 7</div>
+        <aside class="notes">
+          Complete the example with a scientific result. The paper ran separate age + BMI
+          and age + smoking models, both including gender and site covariates. Figure 7 shows
+          the age association; it is not a longitudinal trajectory or evidence of causation.
+          The displayed signed significance map is not an effect-size map. All maps used
+          FDR correction at 0.05. The roughly 40-minute figure is the reported computation
+          after setup and mapping, not the duration of preprocessing or study coordination.
+          Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC12077935/ (Fig. 7 and §4).
+        </aside>
+      </section>
+
       <!-- 3. Three-category framework: pillars feeding platforms -->
       <section>
         <div class="pillars-wrap">
@@ -381,11 +525,12 @@
             <!-- 3. Platforms: the layer the pillars feed -->
             <div class="layer-box pillars-platform lyr-platforms fragment fade-in" data-fragment-index="3">
               <p class="lyr-title">Platforms</p>
-              <p class="lyr-sub">turnkey systems that run vetted pipelines across sites</p>
+              <p class="lyr-sub">systems for deploying and coordinating analyses across sites</p>
               <ul class="lyr-list plat-list">
                 <li>COINSTAC&ensp;<a href="https://coinstac.org" target="_blank" rel="noopener" class="plat-url">coinstac.org</a></li>
                 <li>NeuroFLAME&ensp;<a href="https://neuroflame.org" target="_blank" rel="noopener" class="plat-url">neuroflame.org</a></li>
                 <li>FeTS&ensp;<a href="https://github.com/FeTS-AI" target="_blank" rel="noopener" class="plat-url">github.com/FeTS-AI</a></li>
+                <li>Fed&#8209;BioMed&ensp;<a href="https://fedbiomed.org" target="_blank" rel="noopener" class="plat-url">fedbiomed.org</a></li>
               </ul>
             </div>
 
@@ -398,9 +543,21 @@
           Frameworks = reusable engines & FAIR/harmonization plumbing (Fed-BioMed, Nipoppy,
           Neurobagel, NV FLARE, Vantage6).
           Methods and frameworks are semi-independent, but both feed into Platforms =
-          end-user systems that run vetted pipelines across sites (COINSTAC / NeuroFLAME).
-          Work migrates upward: bespoke method code and glue infrastructure get absorbed into
-          turnkey platforms.
+          systems for deploying and coordinating analyses across sites.
+          These are overlapping roles, not mutually exclusive product classes. Fed-BioMed
+          supplies both an FL engine and a programmable biomedical FL platform, with researcher/node
+          deployment, a node GUI, local training-plan approval and secure aggregation.
+          Inria reports deployment across Centre Antoine Lacassagne, Centre Henri Becquerel and
+          Institut Curie. Its IXI brain-segmentation tutorial establishes neuroimaging relevance.
+          The researcher workflow still uses Python training plans and Jupyter. Local code approval
+          is a security/governance mechanism, not evidence of scientific or clinical pipeline validation.
+          Do not imply that all these systems offer a turnkey catalog of vetted neuroimaging pipelines.
+          Sources checked 2026-10-22:
+          https://docs.fedbiomed.org/6.4.0/user-guide/deployment/deployment/
+          https://docs.fedbiomed.org/latest/getting-started/fedbiomed-workflow/
+          https://docs.fedbiomed.org/latest/user-guide/nodes/training-plan-security-manager/
+          https://docs.fedbiomed.org/6.3.0/tutorials/medical/medical-image-segmentation-unet-library/
+          https://radar.inria.fr/report/2025/epione/index.html
         </aside>
       </section>
 
@@ -502,8 +659,7 @@
               <li>Decentralized dFNC</li>
               <li>ICA / IVA &middot; Neuromark</li>
               <li>Federated GLM / regression</li>
-              <li class="sessioned">Federated normative models
-                <span class="sess"><i class="fas fa-microphone"></i>Bayer</span></li>
+              <li>Federated normative models</li>
             </ul>
           </div>
           <!-- RIGHT: federated learning (trains shared models) -->
@@ -514,15 +670,11 @@
               <li>Federated brain&#8209;age</li>
               <li>AD / dementia classification</li>
               <li>MRI reconstruction &amp; segmentation</li>
-              <li class="sessioned">Brain&#8209;age, cognitive decline, progression
-                <span class="sess"><i class="fas fa-microphone"></i>Wang</span></li>
-              <li class="sessioned">Robust optimization &amp; unlearning
-                <span class="sess"><i class="fas fa-microphone"></i>Lorenzi</span></li>
+              <li>Brain&#8209;age, cognitive decline, progression</li>
+              <li>Robust optimization &amp; unlearning</li>
             </ul>
           </div>
         </div>
-
-        <p class="cs-legend"><span class="sess"><i class="fas fa-microphone"></i></span> presented in this session</p>
 
         <aside class="notes">
           The crowded space of papers: clever algorithms on structural MRI and fMRI, on both the
@@ -530,10 +682,8 @@
           (brain age, AD, reconstruction).
           Examples: Gazula et al. federated VBM/dFNC; Neuromark ICA in COINSTAC (~2000 adolescents);
           FLightcase brain-age in MS; Vantage6+PHT brain-age; MetisFL AD prediction.
-          Three of the talks after me live here: Bayer brings federated normative modelling
-          (an analysis-side method), while Wang's PD/AD experiments (brain age, cognitive decline,
-          progression) and Lorenzi's robustness/unlearning work are learning-side contributions.
-          Click to reveal each speaker chip as I name them.
+          Federated normative modelling is an analysis-side method; brain age, cognitive decline,
+          progression, and robust optimization/unlearning are learning-side applications and methods.
         </aside>
       </section>
 
@@ -552,9 +702,7 @@
               <li>Flower &middot; PySyft &middot; FATE</li>
               <li>OpenFL &middot; FedML &middot; TF Federated</li>
               <li>Vantage6 / PHT &middot; MetisFL</li>
-              <li class="sessioned">Fed&#8209;BioMed
-                <span class="sess"><i class="fas fa-microphone"></i>Wang</span>
-                <span class="sess"><i class="fas fa-microphone"></i>Lorenzi</span></li>
+              <li>Fed&#8209;BioMed</li>
             </ul>
           </div>
           <!-- RIGHT: FAIR data, harmonization & toolkits -->
@@ -563,68 +711,164 @@
             <p class="cs-ctag">standardize, harmonize, discover &middot; make FL repeatable</p>
             <ul class="cs-tags">
               <li>BIDS &middot; analysis&#8209;ready derivatives</li>
-              <li class="sessioned">Nipoppy
-                <span class="sess"><i class="fas fa-microphone"></i>Wang</span></li>
-              <li class="sessioned">Neurobagel
-                <span class="sess"><i class="fas fa-microphone"></i>Wang</span></li>
-              <li class="sessioned">PCNtoolkit
-                <span class="sess"><i class="fas fa-microphone"></i>Bayer</span></li>
+              <li>Nipoppy</li>
+              <li>Neurobagel</li>
+              <li>PCNtoolkit</li>
             </ul>
           </div>
         </div>
 
-        <p class="cs-legend"><span class="sess"><i class="fas fa-microphone"></i></span> presented in this session</p>
-
         <aside class="notes">
           The things you glue together: FL engines plus FAIR data pipelines and harmonization/search.
+          FAIR stands for Findable, Accessible, Interoperable and Reusable.
           Essential, but you still need serious engineering to get from here to a working study.
-          Wang and Lorenzi both build on Fed-BioMed as the FL engine; Wang adds the Nipoppy +
-          Neurobagel FAIR/harmonization layer; Bayer's PCNtoolkit is the normative-modelling toolkit
-          behind her federated site-effect correction.
+          Fed-BioMed provides the FL engine; Nipoppy and Neurobagel provide the FAIR data layer;
+          PCNtoolkit supports normative modelling.
+          Fed-BioMed also provides deployment and governance components, so it appears under
+          Platforms as well. The categories describe roles, not exclusive product labels.
           Stack: data -> Nipoppy -> Neurobagel -> Fed-BioMed -> model.
         </aside>
       </section>
 
       <!-- 8. Category 3: platforms -->
       <section data-cat="3">
-        <h2>Neuro Platforms</h2>
-        <p class="cs-sub">turnkey, neuro&#8209;specific systems &mdash; run vetted pipelines, no infra to assemble</p>
+        <h2>Platforms</h2>
+        <p class="cs-sub">from graphical research workflows to programmable FL</p>
 
         <div class="cs-plats">
           <div class="cs-plat">
             <h3>COINSTAC</h3>
-            <p class="cs-pmeta">GUI &middot; vetted pipelines &middot; Vaults</p>
+            <p class="cs-pmeta">Graphical workflows<br>for researchers</p>
             <a href="https://coinstac.org" target="_blank" rel="noopener" class="plat-url">coinstac.org</a><br>
-            <span class="sess me"><i class="fas fa-star"></i>this talk</span>
+            <span class="talk-badge"><i class="fas fa-star"></i>this talk</span>
           </div>
           <div class="cs-plat">
             <h3>NeuroFLAME</h3>
-            <p class="cs-pmeta">next&#8209;gen &middot; on NV FLARE &middot; differential privacy</p>
+            <p class="cs-pmeta">Graphical workflows<br>for researchers</p>
             <a href="https://neuroflame.org" target="_blank" rel="noopener" class="plat-url">neuroflame.org</a><br>
-            <span class="sess me"><i class="fas fa-star"></i>this talk</span>
+            <span class="talk-badge"><i class="fas fa-star"></i>this talk</span>
           </div>
           <div class="cs-plat ghost">
             <h3>FeTS</h3>
             <p class="cs-pmeta">federated tumor segmentation</p>
             <a href="https://github.com/FeTS-AI" target="_blank" rel="noopener" class="plat-url">github.com/FeTS-AI</a>
           </div>
+          <div class="cs-plat ghost">
+            <h3>Fed&#8209;BioMed</h3>
+            <p class="cs-pmeta">Python workflows<br>for technical teams</p>
+            <a href="https://fedbiomed.org" target="_blank" rel="noopener" class="plat-url">fedbiomed.org</a>
+          </div>
         </div>
 
-        <p class="cs-note fragment">Category 3 is <strong>under&#8209;served</strong>. We need much more activity in making our tools useful where it matters.</p>
+        <p class="cs-note fragment">Turnkey neuroimaging workflows remain <strong>under&#8209;served</strong>. Deployment and usability still need work.</p>
 
         <aside class="notes">
-          Here the end-user sees "run VBM" or "run ICA/dFNC" rather than "configure FedAvg on five sites".
-          This category is NOT crowded -- this is where we spend most of our time.
+          These systems span packaged neuroimaging workflows and programmable biomedical FL.
+          Our focus is making analyses such as VBM and ICA/dFNC accessible to end users.
+          COINSTAC and NeuroFLAME focus on graphical workflows for researchers.
+          Fed-BioMed provides a platform for technical teams to build and run federated studies.
+          It has graphical administration tools, but running analyses generally requires programming.
+          Its researcher workflow uses Python training plans and Jupyter. Its GUI primarily supports
+          site administration, datasets and training-plan approval. The distinction is who the
+          interface serves and how much coding the analysis requires, rather than a blanket
+          judgment about ease of use.
           COINSTAC: first neuro-first decentralized analysis platform; Vaults = always-on datasets.
           NeuroFLAME: next gen, rebuilt on NV FLARE, modular, differential privacy.
           FeTS is the other neuro-specific platform (tumor segmentation). brainchop is the local-first,
           zero-footprint, in-browser experience we are chasing for NeuroFLAME -- I come back to it later.
+          Fed-BioMed is a programmable biomedical FL platform with real hospital deployments.
+          It requires technical setup and Python training plans. Its node-side code approval should
+          not be conflated with a scientifically validated neuroimaging pipeline catalog.
+          Evidence and source links are in the Pillars slide notes.
           The "this talk" chips mark the platforms I present today.
           ADOPTION GAP (the evidence this layer is under-served): FL publications have grown ~8x
           (Ali et al., arXiv 2024), yet real deployment is rare -- only 32 of 22,693 studies reach
           real clinical deployment (Teo et al., Cell Reports Medicine 2024), and just 19 of 4,720
           are real-world public-health studies (Shah et al., Healthcare 2025). Lots of methods and
           frameworks, almost no turnkey tools -- exactly the Category 3 gap.
+        </aside>
+      </section>
+
+      <!-- Case 2: Rootes-Murdy 2024 — scientific payoff of a federated platform -->
+      <section id="rootes-cohort" class="case-slide">
+        <h2>A Cross-Disorder Study</h2>
+        <p class="case-sub">Which gray-matter alterations are shared across diagnoses?</p>
+        <p class="case-cohort-line"><strong>4,102 participants</strong> · 8 contributing datasets · local analysis through COINSTAC</p>
+        <img class="case-table" src="figures/rootes2024_cohort_table.svg" alt="Original Table 1 from Rootes-Murdy et al.: participant numbers, age, sex and diagnostic composition for eight contributing datasets, including 2,743 healthy controls">
+        <div class="slide-footer"><a href="https://doi.org/10.1016/j.patter.2024.100987" target="_blank" rel="noopener">Rootes-Murdy et al. · Patterns (2024)</a> · Original Table 1</div>
+        <aside class="notes">
+          Main case: a completed cross-disorder scientific study using the platform.
+          The original Table 1 is preserved, including its total and abbreviation key.
+          Eight contributing datasets include multiple acquisition sites; do not equate
+          these eight entries with eight scanners. The total includes 2,743 healthy controls.
+          Sites used a common preprocessing pipeline. COINSTAC ran local computations,
+          collected intermediate results at the private aggregator, and returned combined results.
+          Each diagnostic category was compared with controls using voxelwise general linear
+          regression, controlling for age, sex, site and APOE allele classification as reported.
+          Spatial correlations then compared the diagnostic statistical maps.
+          Source: https://doi.org/10.1016/j.patter.2024.100987 (Table 1; Experimental procedures).
+        </aside>
+      </section>
+
+      <section id="rootes-shared-patterns" class="case-slide">
+        <h2>Shared Gray-Matter Patterns</h2>
+        <p class="case-sub">Spatial similarity of diagnostic maps from federated VBM</p>
+        <div class="case-columns case-correlations">
+          <figure>
+            <img src="figures/rootes2024_spatial_correlations.jpg" alt="Rootes-Murdy et al. original Figure 9: spatial-correlation heatmap comparing diagnostic gray-matter statistical maps; all labels, values and the colour scale are preserved">
+          </figure>
+          <div class="case-copy">
+            <p><strong>Shared anatomy</strong><br>Schizophrenia, depression and autism show similar spatial patterns.</p>
+            <p class="fragment"><strong>Scientific payoff</strong><br>Cross-disorder comparison without pooling individual-level images.</p>
+            <p class="case-small">SZ: schizophrenia<br>MD: major depression<br>ASD: autism spectrum disorder</p>
+          </div>
+        </div>
+        <div class="slide-footer"><a href="https://doi.org/10.1016/j.patter.2024.100987" target="_blank" rel="noopener">Rootes-Murdy et al. · Patterns (2024)</a> · Original Fig. 9</div>
+        <aside class="notes">
+          Figure 9 compares spatial patterns of diagnostic statistical maps, not patient-level
+          predictions, diagnostic accuracy, or causal mechanisms. MD is the figure's label for MDD.
+          Other labels: Rel = unaffected relatives; PTSD = post-traumatic stress disorder;
+          MCI = mild cognitive impairment; BP = bipolar disorder; Spect = spectrum group.
+          The paper reports shared reductions involving the insula and prefrontal regions,
+          with overlap varying by diagnostic pair. A common underlying mechanism is a hypothesis.
+          Cohorts differ substantially in age and group sizes (e.g. MDD n=44, PTSD n=32);
+          covariate adjustment does not remove every possible confound.
+          Preserve the source figure values: the prose rounds SZ–MDD and SZ–ASD differently
+          from Fig. 9. No numbers have been redrawn or substituted.
+          Transition: these studies demonstrate useful federation with conventional statistical
+          models. Foundation models bring a new demand for data and communication capacity.
+          Source: https://doi.org/10.1016/j.patter.2024.100987 (Fig. 9; Results and Limitations).
+        </aside>
+      </section>
+
+      <!-- 1b. Foundation-model era: even more data, almost none of it accessible -->
+      <section>
+        <h2>&hellip;and Foundation Models Are Hungry</h2>
+        <div style="position:relative; display:inline-block; margin-top:-45px;">
+          <img src="figures/foundation_model_training_data.svg" alt="Comparative training-data sizes of foundation models"
+               style="border:0; box-shadow:none; background:none; height:600px; max-width:100%; margin-top: -10px;">
+          <!-- fragment overlaid in the empty band of the chart -->
+          <div class="fragment" style="position:absolute; left:46%; top:30%; transform:translate(-70%,-70%); width:44%; text-align:center; line-height:1.25; font-size:0.8em; color: #FF0000;">
+            yet, globally, we have amassed<br>
+            <strong style="font-size:1.5em;">&gt;1 billion MRI scans</strong>
+          </div>
+        </div>
+        <div class="slide-footer">
+          Sources: [<a href="https://collectiveminds.health/articles/number-of-mri-scans-per-year-worldwide-overview-of-global-mri-utilization" target="_blank" rel="noopener noreferrer">global MRI volumes (~100&ndash;150M/yr)</a>]
+          &middot; [<a href="https://www.scality.com/use-cases/medical-imaging-archive/" target="_blank" rel="noopener noreferrer">imaging share of healthcare data</a>]
+        </div>
+        <aside class="notes">
+          This is the age of foundation models &mdash; everywhere, and now in neuroimaging.
+          But look at the scale gap: frontier LLMs train on tens of trillions of tokens; the best
+          brain-imaging foundation models train on ~50-100k scans (BrainIAC ~49k, BrainLM ~77k,
+          MR-RATE ~98k). Meanwhile the world acquires ~100-150M MRI scans every year (~40M in the US
+          alone); brain & spine are >50% of studies, so tens of millions of brain MRIs annually.
+          Medical imaging is ~70% of all stored healthcare data, yet <10% of images are ever retrieved
+          after 60 days. So the addressable pool is hundreds of millions of brain scans sitting dark in
+          PACS and research archives &mdash; and our FMs touch well under 0.1% of even a single year.
+          That locked "dark knowledge" is exactly what federation could unlock.
+          (Numbers are order-of-magnitude, off-the-cuff: collectiveminds.health MRI volumes; Scality/
+          industry PACS figures.)
         </aside>
       </section>
 
@@ -1462,10 +1706,8 @@
     .cat-cue[data-cat="3"] .s3 .cat-lbl { color: #4a9e5a; font-weight: 700; }
     .cat-cue[data-cat="3"] .s3 .cat-num { background: #4a9e5a; border-color: #4a9e5a; color: #fff; }
 
-    /* ===== Category deep-dive slides: grouped examples + "this session" speaker chips ===== */
+    /* ===== Category deep-dive slides: grouped examples ===== */
     .reveal .cs-sub { font-size: 0.5em; font-style: italic; color: #7d8f95; margin: 2px 0 0; text-align: center; }
-    .reveal .cs-legend { display: flex; justify-content: center; align-items: center; gap: 7px;
-      margin: 12px 0 0; font-size: 0.4em; color: #9aa0a0; letter-spacing: 0.2px; }
 
     .reveal .cs-cols { display: flex; justify-content: center; gap: 6%; margin-top: 30px; text-align: left; }
     .reveal .cs-col { flex: 1 1 0; max-width: 47%; }
@@ -1480,16 +1722,13 @@
     .reveal section[data-cat="1"] .cs-tags li::before { background: #1f6fb2; }
     .reveal section[data-cat="2"] .cs-tags li::before { background: #d08a1e; }
     .reveal section[data-cat="3"] .cs-tags li::before { background: #4a9e5a; }
-    .reveal .cs-tags li.sessioned { font-weight: 600; }
 
-    /* "this session" chip (named speaker) */
-    .reveal .sess { display: inline-flex; align-items: center; gap: 5px;
-      background: #d33682; color: #fff; border-radius: 999px; padding: 2px 9px 2px 8px;
+    /* Badge for platforms covered in this talk */
+    .reveal .talk-badge { display: inline-flex; align-items: center; gap: 5px;
+      background: #586e75; color: #fff; border-radius: 999px; padding: 2px 9px 2px 8px;
       font-size: 0.8em; font-weight: 700; letter-spacing: 0.2px; white-space: nowrap;
       box-shadow: 0 1px 2px rgba(0,0,0,0.14); text-transform: none; }
-    .reveal .sess i { font-size: 0.82em; opacity: 0.95; }
-    .reveal .sess.me { background: #586e75; }            /* this talk (the opener) */
-    .reveal .cs-legend .sess { font-size: 1em; }
+    .reveal .talk-badge i { font-size: 0.82em; opacity: 0.95; }
 
     /* Category 3: platform cards (sparse, end-user layer) */
     .reveal .cs-plats { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch;
@@ -1503,7 +1742,7 @@
     .reveal .cs-plat .cs-pmeta { font-size: 0.34em; color: #7d8f95; font-style: italic;
       margin: 0 0 9px; letter-spacing: 0.2px; line-height: 1.3; }
     .reveal .cs-plat .plat-url { font-size: 0.32em; color: #268bd2; }
-    .reveal .cs-plat .sess { font-size: 0.4em; margin-top: 9px; }
+    .reveal .cs-plat .talk-badge { font-size: 0.4em; margin-top: 9px; }
     .reveal .cs-note { font-size: 0.46em; color: #657b83; text-align: center; margin-top: 30px; }
     .reveal .cs-note strong { color: #3a7d47; }
 
@@ -1694,7 +1933,7 @@
     /* Platforms anchored bottom-center; arrows overlay the figure */
     .reveal .pillars-platform {
       position: absolute;
-      left: 150px; top: 330px;
+      left: 150px; top: 300px;
       width: 320px; max-width: 320px;
       text-align: center;
     }
@@ -1764,7 +2003,7 @@
       left: 0%;
     }
 
-    .opening-slide #header-left img {
+    #header-left img {
       width: 130px;
     }
 
@@ -1886,6 +2125,20 @@
     })();
 
   </script>
+
+
+<script>
+(function () {
+  var slide = document.getElementById('gazula-federation');
+  function syncGazulaMap() {
+    slide.setAttribute('data-gm-stage', String(slide.querySelectorAll('.gm-step.visible').length));
+  }
+  ['ready', 'slidechanged', 'fragmentshown', 'fragmenthidden'].forEach(function (event) {
+    Reveal.on(event, syncGazulaMap);
+  });
+  syncGazulaMap();
+})();
+</script>
 
 </body>
 
