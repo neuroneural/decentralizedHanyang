@@ -450,6 +450,10 @@
           Complete the example with a scientific result. The paper ran separate age + BMI
           and age + smoking models, both including gender and site covariates. Figure 7 shows
           the age association; it is not a longitudinal trajectory or evidence of causation.
+          Both Gazula and Rootes-Murdy use federated voxelwise regression for VBM.
+          Gazula studies associations with age, BMI and smoking; Rootes-Murdy compares
+          diagnostic patterns across disorders. Regression is the statistical engine in both,
+          with measurements at individual voxels rather than precomputed regional volumes.
           The displayed signed significance map is not an effect-size map. All maps used
           FDR correction at 0.05. The roughly 40-minute figure is the reported computation
           after setup and mapping, not the duration of preprocessing or study coordination.
@@ -798,6 +802,8 @@
         <div class="slide-footer"><a href="https://doi.org/10.1016/j.patter.2024.100987" target="_blank" rel="noopener">Rootes-Murdy et al. · Patterns (2024)</a> · Original Table 1</div>
         <aside class="notes">
           Main case: a completed cross-disorder scientific study using the platform.
+          Both examples use federated voxelwise regression for VBM. Gazula studies age,
+          BMI and smoking; Rootes-Murdy compares diagnostic patterns across disorders.
           The original Table 1 is preserved, including its total and abbreviation key.
           Eight contributing datasets include multiple acquisition sites; do not equate
           these eight entries with eight scanners. The total includes 2,743 healthy controls.
@@ -827,6 +833,15 @@
         <aside class="notes">
           Figure 9 compares spatial patterns of diagnostic statistical maps, not patient-level
           predictions, diagnostic accuracy, or causal mechanisms. MD is the figure's label for MDD.
+          As in Gazula, the statistical engine is voxelwise regression. The scientific question
+          shifts from age, BMI and smoking to similarities among diagnostic patterns.
+          To build the matrix, each diagnosis is first compared with healthy controls.
+          The methods specify spatial correlations between the resulting diagnostic -log(p)
+          maps: corresponding voxel values form paired vectors, and each pair of maps yields
+          one matrix entry. The figures encode effect direction with positive and negative values.
+          This summarizes spatial significance patterns, not raw regional volumes or effect sizes.
+          The main-text methods do not fully specify the correlation mask or thresholding;
+          avoid claiming a particular implementation without checking the analysis code.
           Other labels: Rel = unaffected relatives; PTSD = post-traumatic stress disorder;
           MCI = mild cognitive impairment; BP = bipolar disorder; Spect = spectrum group.
           The paper reports shared reductions involving the insula and prefrontal regions,
